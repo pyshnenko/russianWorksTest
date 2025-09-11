@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useEffect} from "react";
 import { reqLocationPermission } from "./helpers/permissions";
 import Geolocation from "@react-native-community/geolocation";
 import { Button, Text, Box } from "@react-native-material/core";
@@ -31,6 +31,10 @@ export default observer(function LocationDisplay(): React.ReactNode {
             }
         );
     };
+
+    useEffect(()=>{
+        getLocation()
+    },[])
 
     return (
         <Box>
