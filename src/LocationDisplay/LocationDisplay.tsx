@@ -22,9 +22,13 @@ export default observer(function LocationDisplay(): React.ReactNode {
                 AppStore.setLocation(position.coords)
             },
             (error) => {
-                AppStore.setLocationStatus(LocationStatus.Error);
+                AppStore.setLocationStatus(LocationStatus.ErrorLocation);
             },
-            { enableHighAccuracy: true, timeout: 30000, maximumAge: 10000 } // Опции для получения данных
+            { 
+                enableHighAccuracy: false, //задача - определять город. Высокая точность не нужна и замедлит работу
+                timeout: 30000, 
+                maximumAge: 5 * 60 * 1000 //кэш позиции на 5 минут. Сомнительно что пользователь сможет быстрее покинуть город
+            }
         );
     };
 

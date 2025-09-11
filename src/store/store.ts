@@ -16,11 +16,10 @@ class Store {
     }
 
     setLocation(loc: Location) {
-        this.lat = loc.latitude
-        this.lot = loc.longitude
-        this.locationStatus = LocationStatus.DataReady;
+        this.lat = loc.latitude;
+        this.lot = loc.longitude;
+        this.setLocationStatus(LocationStatus.DataReady);
         workUpd(loc.latitude, loc.longitude);
-        this.locationMessage = LocationStatusMessage.DataReady;
     }
 
     setLocationStatus(status: LocationStatus) {
@@ -38,8 +37,24 @@ class Store {
                 this.locationMessage = LocationStatusMessage.AwaitData;
                 break;
             }
-            case LocationStatus.Error: {
-                this.locationMessage = LocationStatusMessage.Error;
+            case LocationStatus.AwaitWorkBase: {
+                this.locationMessage = LocationStatusMessage.AwaitWorkBase;
+                break;
+            }
+            case LocationStatus.DataReady: {
+                this.locationMessage = LocationStatusMessage.DataReady;
+                break;
+            }
+            case LocationStatus.FullDataReady: {
+                this.locationMessage = LocationStatusMessage.FullDataReady;
+                break;
+            }
+            case LocationStatus.ErrorLocation: {
+                this.locationMessage = LocationStatusMessage.ErrorLocation;
+                break;
+            }
+            case LocationStatus.ErrorData: {
+                this.locationMessage = LocationStatusMessage.ErrorData;
                 break;
             }
         }
@@ -47,6 +62,7 @@ class Store {
 
     setWorkBase(base: ApiReqObjectType[]) {
         this.workBase = base;
+        this.setLocationStatus(base.length ? LocationStatus.FullDataReady : LocationStatus.ErrorData);
     }
 }
 

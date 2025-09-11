@@ -3,7 +3,10 @@ export enum LocationStatusMessage {
     NoData = 'Нет данных',
     AwaitData = 'Определение местоположения',
     DataReady = 'Местоположение определено',
-    Error = 'Не удалось получить данные'
+    AwaitWorkBase = 'Получаем вакансии',
+    FullDataReady = 'Вакансии загружены',
+    ErrorLocation = 'Не удалось получить данные',
+    ErrorData = 'Ошибка получения вакансий'
 }
 
 /**
@@ -29,7 +32,19 @@ export enum LocationStatus {
      */
     DataReady = 3,
     /**
+     * Ожидаем данные о работе
+     */
+    AwaitWorkBase = 4,
+    /**
+     * Все готово
+     */
+    FullDataReady = 5,
+    /**
      * Ошибка получения данных о местоположении
      */
-    Error = 4
+    ErrorLocation = 6,
+    /**
+     * Ошибка получения данных от сервера
+     */
+    ErrorData = 7
 }
