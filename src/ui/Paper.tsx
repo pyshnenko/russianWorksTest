@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { memo } from 'react';
 import { View, StyleSheet, Platform, StyleProp, ViewStyle } from 'react-native';
 import { useTheme } from '@react-native-material/core';
 
@@ -24,11 +24,10 @@ const Paper: React.FC<PaperProps> = ({
   borderRadius = 8,
 }) => {
   const theme = useTheme(); // Получаем текущую тему
-
   // Динамические стили на основе темы
   const paperStyle = StyleSheet.create({
     container: {
-      backgroundColor: theme.palette.background.main, // Цвет фона из темы
+      backgroundColor: theme.colorScheme === 'dark' ? '#232323' : '#fafafa', // Цвет фона из темы
       borderRadius,
       ...Platform.select({
         android: {
@@ -51,4 +50,4 @@ const Paper: React.FC<PaperProps> = ({
   );
 };
 
-export default Paper;
+export default memo(Paper);

@@ -4,6 +4,7 @@ import Paper from '../../ui/Paper';
 import { StyleSheet } from 'react-native';
 import {Image} from 'react-native';
 import { WorkType } from '../../types/api';
+import { SmallCardStyle as style } from './styles';
 
 interface SmallCardProps {
     logo: string,
@@ -20,25 +21,12 @@ export default memo(function SmallCard(props: SmallCardProps): React.ReactNode {
         <Paper style={style.box}>
             <Box>
                 {workTypes.map((item: WorkType, index: number)=>
-                    <Text style={{ fontWeight: 'bold' }} key={item.id}>{item.nameOne}</Text>
+                    <Text style={{ fontWeight: 'bold', fontSize: 18 }} key={item.id}>{item.nameOne}</Text>
                 )}
                 <Text>{priceWorker} руб. за смену</Text>
-                <Text>{companyName}</Text>
+                <Text style={{ fontSize: 13 }}>{companyName}</Text>
             </Box>
             <Image source={{uri: logo}} width={50} height={50} />
         </Paper>
     )
-})
-
-const style = StyleSheet.create({
-    box: {
-        flexDirection: 'row',
-        width: '100%',
-        justifyContent: 'space-between',
-        padding: 8
-    },
-    vacantionBox: {
-        flexDirection: 'column',
-        maxWidth: '80%'
-    }
 })

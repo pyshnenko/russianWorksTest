@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useCallback } from 'react';
 import { Box, useTheme } from '@react-native-material/core';
 import {
   TouchableOpacity,
@@ -10,7 +10,7 @@ import { observer } from 'mobx-react-lite';
 import { AppStore } from '../store/store';
 import { SwipeListView } from 'react-native-swipe-list-view';
 import SmallCard from './components/SmallCard';
-import AnimatedFullList from './components/AnimatedFullList';
+import FullCard from './components/FullCard';
 
 export default observer(function WorkList(): React.ReactNode {
   const [rowsCount, setRowsCount] = useState(25);
@@ -22,13 +22,13 @@ export default observer(function WorkList(): React.ReactNode {
       setRowsCount(prevCount => prevCount + 25);
     }
   };
+  const handlePress = useCallback((index: number) => { //для уменьшения ререндеринга компонента SmallCard
+    setOpenCardIndex(index);
+  }, []);
 
   return (
     <SafeAreaView style={styles.container}>
-      <AnimatedFullList
-        data={openCardIndex === -1 ? null : AppStore.workBase[openCardIndex]}
-        setIsOpen={setOpenCardIndex}
-      />
+      {openCardIndex > -1 && <FullCard setOpenCardIndex={setOpenCardIndex} cardData={AppStore.workBase[openCardIndex]} />}
 
       <Box
         style={[
@@ -37,9 +37,9 @@ export default observer(function WorkList(): React.ReactNode {
         ]}
       >
         <SwipeListView
-          data={AppStore.workBase.slice(0, rowsCount)}
+          data={AppStore.workBase.slice(0, rowsCount)} //рендерим постепенно, по 25 элементов за раз
           renderItem={({ item, index }) => (
-            <TouchableOpacity onPress={() => setOpenCardIndex(index)}>
+            <TouchableOpacity key={item.id} onPress={() => handlePress(index)}>
               <SmallCard {...item} />
             </TouchableOpacity>
           )}
@@ -47,10 +47,7 @@ export default observer(function WorkList(): React.ReactNode {
           rightOpenValue={-150}
           previewRowKey={'0'}
           previewOpenValue={-40}
-          previewOpenDelay={3000}
-          onRowDidOpen={rowKey => {
-            console.log('This row opened', rowKey);
-          }}
+          previewOpenDelay={0}
           onEndReached={handleEndReached}
           onEndReachedThreshold={0.1}
           ItemSeparatorComponent={() => <Box style={{ height: 10 }} />}
