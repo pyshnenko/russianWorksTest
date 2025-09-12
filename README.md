@@ -5,7 +5,7 @@
 ![](demoFiles/demo.gif)
 
 ## Билд
-[Скачать](https://github.com/pyshnenko/russianWorksTest/blob/main/demoFiles/app-release.apk)
+[Скачать](https://github.com/pyshnenko/russianWorksTest/raw/refs/heads/main/demoFiles/app-release.apk)
 
 Создать небольшое приложение на **React Native (CLI, без Expo)**, которое показывает список доступных смен для подработки, полученных по геолокации пользователя.
 
