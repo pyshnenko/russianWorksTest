@@ -3,7 +3,7 @@ import LocationDisplay from "./LocationDisplay/LocationDisplay";
 import { Box } from "@react-native-material/core";
 import { ThemeProvider } from '@react-native-material/core';
 import WorkList from "./WorkList/WorkList";
-import LoadingController from "./loading/Loading";
+import LoadingController from "./loading/LoadingController";
 import { SafeAreaProvider } from 'react-native-safe-area-context';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 

@@ -30,4 +30,4 @@ interface ApiReqObjectType {
   isPromotionEnabled: boolean;
 }
 
-export type { ApiReqObjectType };
+export type { ApiReqObjectType, WorkType };

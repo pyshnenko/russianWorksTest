@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState} from 'react';
 import type { ApiReqObjectType } from '../types/api';
 import axios from 'axios';
 import { Box, Text } from '@react-native-material/core';
@@ -10,15 +10,22 @@ import SmallCard from './components/SmallCard';
 
 export default observer(function WorkList(): React.ReactNode {
 
+    const [rowsCount, setRowsCount] = useState(25);
+
+    const handleEndReached = () => {
+        if (rowsCount < AppStore.workBase.length) {
+            setRowsCount(prevCount => prevCount + 25);
+        }
+    }
+
     return (
         <SafeAreaView style={{ flex: 1 }}>
             <Box style={{ flex: 1 }}>
                 <SwipeListView
-                    data={AppStore.workBase.slice(0,25)}
+                    data={AppStore.workBase.slice(0,rowsCount)}
                     renderItem={({ item }) => (
                         <SmallCard 
-                            logo={item.logo}
-                            companyName={item.companyName || 'Неизвестная компания'} 
+                            {...item}
                         />
                     )}
                     leftOpenValue={75}
@@ -29,12 +36,10 @@ export default observer(function WorkList(): React.ReactNode {
                     onRowDidOpen={rowKey => {
                         console.log('This row opened', rowKey);
                     }}
-                    // Увеличьте высоту строк, если нужно
+                    onEndReached={handleEndReached}
+                    onEndReachedThreshold={0.1}
                     ItemSeparatorComponent={() => <Box style={{ height: 10 }} />}
                 />
-                <Box style={{height: 50}}>
-                    <Text>{'Кнопки'}</Text>
-                </Box>
             </Box>
         </SafeAreaView>
     )

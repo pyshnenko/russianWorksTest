@@ -1,10 +1,12 @@
 import React, {useEffect} from "react";
 import { reqLocationPermission } from "./helpers/permissions";
 import Geolocation from "@react-native-community/geolocation";
-import { Button, Text, Box } from "@react-native-material/core";
+import { Button, Text, Box, IconButton } from "@react-native-material/core";
 import { observer } from "mobx-react-lite";
 import { AppStore } from "../store/store";
 import { LocationStatus } from "../types/storeTypes";
+import Icon from 'react-native-vector-icons/FontAwesome';
+import { StyleSheet } from "react-native";
 
 export default observer(function LocationDisplay(): React.ReactNode {
 
@@ -38,16 +40,25 @@ export default observer(function LocationDisplay(): React.ReactNode {
 
     return (
         <Box>
-            <Button title="Получить координаты" onPress={()=>{           
-                getLocation()
-                }} />
             {true && (
-                <Box>
-                    <Text>{AppStore.locationMessage}</Text>
-                    <Text>Широта: {AppStore.lat}</Text>
-                    <Text>Долгота: {AppStore.lot}</Text>
+                <Box style={styled.bigBlock}>
+                    <Box style={styled.smollBlock}>
+                        <Text>Широта: {AppStore.lat}</Text>
+                        <Text>Долгота: {AppStore.lot}</Text>
+                    </Box>
+                    <IconButton icon={props => <Icon name="refresh" {...props} />} onPress={getLocation} />
                 </Box>
             )}
         </Box>
     )
+})
+
+const styled = StyleSheet.create({
+    smollBlock: {
+        flexDirection: 'column'
+    },
+    bigBlock: {
+        flexDirection: 'row',
+        justifyContent: 'space-evenly'
+    }
 })

@@ -16,7 +16,7 @@ const AnimatedModal = ({ children, isVisible }: { children: React.ReactNode, isV
   const modalAnimatedValue = useSharedValue(0); // Начальное значение — скрыто
 
   const startAnimation = (target: number) => {
-    modalAnimatedValue.value = withTiming(target, { duration: 1000, easing: Easing.ease });
+    modalAnimatedValue.value = withTiming(target, { duration: 200, easing: Easing.ease });
   };
 
   useEffect(() => {

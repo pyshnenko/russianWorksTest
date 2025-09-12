@@ -16,10 +16,10 @@ class Store {
     }
 
     setLocation(loc: Location) {
-        this.lat = loc.latitude;
-        this.lot = loc.longitude;
+        this.lat = 55.803131;//loc.latitude;
+        this.lot = 37.606331;//loc.longitude;
         this.setLocationStatus(LocationStatus.DataReady);
-        workUpd(loc.latitude, loc.longitude);
+        workUpd(this.lat, this.lot);
     }
 
     setLocationStatus(status: LocationStatus) {
