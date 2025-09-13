@@ -11,8 +11,14 @@ const uriConstructor = (lat: number, lot: number): string|null => {
 const req = async (lat: number, lot: number): Promise<ApiReqObjectType[] | null> => {
     const uri = uriConstructor(lat, lot);
     if (!uri) return null
-    const result = await axios(uri)
-    return [...result.data.data]
+    try {
+        const result = await axios(uri)
+        return [...result.data.data]
+    }
+    catch (err) {
+        console.log(err)
+        return null
+    }
 }
 
 const Api = {

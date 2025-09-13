@@ -5,24 +5,24 @@ import type {ApiReqObjectType} from '../types/api';
 import {workUpd} from './helper'
 
 class Store {
-    lat = 0;
+    lat = 0;  //локация
     lot = 0;
-    locationMessage: LocationStatusMessage = LocationStatusMessage.NoData;
-    locationStatus: LocationStatus = LocationStatus.NoData;
-    workBase: ApiReqObjectType[] = [];
+    locationMessage: LocationStatusMessage = LocationStatusMessage.NoData; //сообщение
+    locationStatus: LocationStatus = LocationStatus.NoData; //статус
+    workBase: ApiReqObjectType[] = []; //база данных
 
     constructor() {
         makeAutoObservable(this)
     }
 
-    setLocation(loc: Location) {
-        this.lat = 55.803131;//loc.latitude;
-        this.lot = 37.606331;//loc.longitude;
+    setLocation(loc: Location) { //установка локации
+        this.lat = loc.latitude; //55.803131;//
+        this.lot = loc.longitude; //37.606331;//
         this.setLocationStatus(LocationStatus.DataReady);
         workUpd(this.lat, this.lot);
     }
 
-    setLocationStatus(status: LocationStatus) {
+    setLocationStatus(status: LocationStatus) { //установка статуса
         this.locationStatus = status;
         switch (status) {
             case LocationStatus.NoData: {
@@ -60,7 +60,7 @@ class Store {
         }
     }
 
-    setWorkBase(base: ApiReqObjectType[]) {
+    setWorkBase(base: ApiReqObjectType[]) { //установка базы данных
         this.workBase = base;
         this.setLocationStatus(base.length ? LocationStatus.FullDataReady : LocationStatus.ErrorData);
     }
