@@ -27,7 +27,7 @@ class Store {
 
   setLocationStatus(status: LocationStatus) {
     //установка статуса
-    console.log(status);
+    //console.log(status);
     this.locationStatus = status;
     switch (status) {
       case LocationStatus.NoData: {

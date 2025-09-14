@@ -3,6 +3,7 @@
 ## Видео работы
 
 ![](demoFiles/demo.gif)
+файл весит 18МБ, возможно придется подождать загрузки. Сильнее сжать не получилось
 
 ## Билд
 [Скачать](https://github.com/pyshnenko/russianWorksTest/raw/refs/heads/main/demoFiles/app-release.apk)

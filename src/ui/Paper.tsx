@@ -12,7 +12,9 @@ interface PaperProps {
   shadowRadius?: number;
   borderRadius?: number;
 }
-
+/**
+ * аналог Paper в mui
+ */
 const Paper: React.FC<PaperProps> = ({
   children,
   style,

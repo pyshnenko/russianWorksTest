@@ -46,6 +46,17 @@ export default observer(function LocationDisplay(): React.ReactNode {
           />
         </Box>
       )}
+      {AppStore.locationStatus === LocationStatus.ErrorLocation && (
+        <Box style={styled.errorBlock}>
+          <Text variant="h5">Геолокация отключена</Text>
+          <Text>Включите геолокацию</Text>
+          <Button
+            title="Попробовать снова"
+            onPress={getLocation}
+            style={styled.errorButton}
+          />
+        </Box>
+      )}
       {AppStore.locationStatus === LocationStatus.ErrorData && (
         <Box style={styled.errorBlock}>
           <Text variant="h5">Проблемы с соединением</Text>

@@ -11,7 +11,11 @@ interface SmallCardProps {
   workTypes: WorkType[];
   priceWorker: number;
 }
-
+/**
+ * Компонент маленькой карточки вакансии
+ * @param props - минимальные сведения о вакансии
+ * @returns компонент
+ */
 export default memo(function SmallCard(props: SmallCardProps): React.ReactNode {
   const { logo, companyName, workTypes, priceWorker } = props;
 

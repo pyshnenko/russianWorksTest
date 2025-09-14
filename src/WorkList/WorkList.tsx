@@ -17,11 +17,18 @@ export default observer(function WorkList(): React.ReactNode {
   const [openCardIndex, setOpenCardIndex] = useState<number>(-1);
   const theme = useTheme(); // Получаем тему
 
-  const handleEndReached = () => {
+  /**
+   * действие по достижению конца списка 
+   * если количество элементов меньше чем в базе, то увеличиваем количество
+   */
+  const handleEndReached = () => { 
     if (rowsCount < AppStore.workBase.length) {
       setRowsCount(prevCount => prevCount + 25);
     }
   };
+  /**
+   * при нажатии на карточку открываем полную версию
+   */
   const handlePress = useCallback((index: number) => {
     //для уменьшения ререндеринга компонента SmallCard
     setOpenCardIndex(index);
