@@ -1,13 +1,12 @@
 import React from 'react';
 import LocationDisplay from './LocationDisplay/LocationDisplay';
 import { Box } from '@react-native-material/core';
-import {
-  ThemeProvider
-} from '@react-native-material/core';
+import { ThemeProvider } from '@react-native-material/core';
 import WorkList from './WorkList/WorkList';
 import LoadingController from './loading/LoadingController';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
+import { StyleSheet } from 'react-native';
 
 interface PropsType {
   isDarkMode: boolean;
@@ -24,24 +23,16 @@ export default function ({ isDarkMode }: PropsType) {
   return (
     <ThemeProvider>
       <Box
-        style={{
-          width: '100%',
-          height: '100%',
-          backgroundColor: isDarkMode ? '#000000' : '#FFFFFF',
-        }}
+        style={[
+          style.baseContainer,
+          isDarkMode ? style.darkContainer : style.lightContainer,
+        ]}
       >
         {/* Компонент отображения состояния загрузки */}
         <LoadingController />
         {/* Обеспечивает безопасную область для контента (например, избегает наложения на системные панели) */}
         <SafeAreaProvider>
-          <Box
-            style={{
-              width: '100%',
-              height: '100%',
-              paddingTop: insets.top,
-              flexDirection: 'column',
-            }}
-          >
+          <Box style={[style.safeArea, { paddingTop: insets.top }]}>
             {/* Компонент отображения информации о локации */}
             <LocationDisplay />
             {/* Компонент отображения вакансий */}
@@ -52,3 +43,21 @@ export default function ({ isDarkMode }: PropsType) {
     </ThemeProvider>
   );
 }
+
+const style = StyleSheet.create({
+  baseContainer: {
+    width: '100%',
+    height: '100%',
+  },
+  lightContainer: {
+    backgroundColor: '#FFFFFF',
+  },
+  darkContainer: {
+    backgroundColor: '#000000',
+  },
+  safeArea: {
+    width: '100%',
+    height: '100%',
+    flexDirection: 'column',
+  },
+});

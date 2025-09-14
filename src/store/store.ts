@@ -17,16 +17,17 @@ class Store {
 
   setLocation(loc: Location) {
     //установка локации
-    this.lat = 55.803131; // для отладки на эмуляторе
-    this.lot = 37.606331;
-    /*this.lat = loc.latitude;
-        this.lot = loc.longitude;*/
+    /*this.lat = 55.803131; // для отладки на эмуляторе
+    this.lot = 37.606331;*/
+    this.lat = loc.latitude;
+    this.lot = loc.longitude;
     this.setLocationStatus(LocationStatus.DataReady);
     workUpd(this.lat, this.lot);
   }
 
   setLocationStatus(status: LocationStatus) {
     //установка статуса
+    console.log(status);
     this.locationStatus = status;
     switch (status) {
       case LocationStatus.NoData: {

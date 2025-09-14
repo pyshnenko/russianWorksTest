@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useCallback } from 'react';
 import { StyleSheet } from 'react-native';
 import Animated, {
   useSharedValue,
@@ -8,10 +8,10 @@ import Animated, {
 } from 'react-native-reanimated';
 
 /**
- * компонент для плавной анимации появления/скрытия
- * @isVisible - видимость
+ * Компонент для плавной анимации появления/скрытия
+ * @param children - дочерние элементы
+ * @param isVisible - флаг видимости
  */
-
 const AnimatedModal = ({
   children,
   isVisible,
@@ -21,12 +21,16 @@ const AnimatedModal = ({
 }) => {
   const modalAnimatedValue = useSharedValue(0); // Начальное значение — скрыто
 
-  const startAnimation = (target: number) => {
-    modalAnimatedValue.value = withTiming(target, {
-      duration: 200,
-      easing: Easing.ease,
-    });
-  };
+  const startAnimation = useCallback(
+    (target: number) => {
+      // оборачиваем запуск анимации в коллбек
+      modalAnimatedValue.value = withTiming(target, {
+        duration: 200,
+        easing: Easing.ease,
+      });
+    },
+    [modalAnimatedValue],
+  );
 
   useEffect(() => {
     if (isVisible) {
@@ -34,11 +38,11 @@ const AnimatedModal = ({
     } else {
       startAnimation(0);
     }
-  }, [isVisible]);
+  }, [isVisible, startAnimation]);
 
   const modalStyle = useAnimatedStyle(() => ({
     opacity: modalAnimatedValue.value,
-    pointerEvents: modalAnimatedValue.value > 0 ? 'auto' : 'none', //прозрачность для касаний
+    pointerEvents: modalAnimatedValue.value > 0 ? 'auto' : 'none', // Прозрачность для касаний
   }));
 
   return (

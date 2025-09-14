@@ -29,20 +29,33 @@ export default observer(function LocationDisplay(): React.ReactNode {
         </Box>
       )}
       {AppStore.locationStatus === LocationStatus.NoPermission && (
-        <Box
-          style={{
-            alignItems: 'center',
-            justifyContent: 'center',
-            height: '100%',
-            padding: 20,
-          }}
-        >
+        <Box style={styled.errorBlock}>
           <Text>Отсутствуют разрешения на доступ к геолокации.</Text>
           <Text>
             Пожалуйста, откройте настройки и дайте разрешения приложению
           </Text>
-          <Button title="Настройки" onPress={() => openSettings()} />
-          <Button title="Повторить" onPress={() => getLocation()} />
+          <Button
+            style={styled.errorButton}
+            title="Настройки"
+            onPress={() => openSettings()}
+          />
+          <Button
+            style={styled.errorButton}
+            title="Повторить"
+            onPress={() => getLocation()}
+          />
+        </Box>
+      )}
+      {AppStore.locationStatus === LocationStatus.ErrorData && (
+        <Box style={styled.errorBlock}>
+          <Text variant="h5">Проблемы с соединением</Text>
+          <Text>Проверьте интернет-соединение</Text>
+          <Text>или попробуйте позже</Text>
+          <Button
+            title="Попробовать снова"
+            onPress={getLocation}
+            style={styled.errorButton}
+          />
         </Box>
       )}
     </Box>
@@ -57,4 +70,12 @@ const styled = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'space-evenly',
   },
+  errorBlock: {
+    alignItems: 'center',
+    justifyContent: 'center',
+    height: '100%',
+    padding: 20,
+    textAlign: 'center',
+  },
+  errorButton: { padding: 12 },
 });

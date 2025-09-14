@@ -56,7 +56,7 @@ export default observer(function WorkList(): React.ReactNode {
           previewOpenDelay={0}
           onEndReached={handleEndReached}
           onEndReachedThreshold={0.1}
-          ItemSeparatorComponent={() => <Box style={{ height: 10 }} />}
+          ItemSeparatorComponent={() => <Box style={styles.separator} />}
         />
       </Box>
     </SafeAreaView>
@@ -72,4 +72,5 @@ const styles = StyleSheet.create({
     paddingBottom: Platform.select({ ios: 20, android: 30 }),
     paddingHorizontal: 4,
   },
+  separator: { height: 10 },
 });

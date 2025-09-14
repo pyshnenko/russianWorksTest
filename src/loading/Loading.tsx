@@ -6,6 +6,7 @@ import { AppStore } from '../store/store';
 import { LocationStatus } from '../types/storeTypes';
 import { useTheme } from '@react-native-material/core';
 import { Text } from '@react-native-material/core';
+import { StyleSheet } from 'react-native';
 
 export default observer(function Loading(): React.ReactNode {
   const theme = useTheme();
@@ -20,26 +21,32 @@ export default observer(function Loading(): React.ReactNode {
 
   return (
     <Box
-      style={{
-        width: '100%',
-        height: '100%',
-        alignItems: 'center',
-        justifyContent: 'center',
-        zIndex: 10000,
-        backgroundColor: theme.palette.background.main,
-      }}
+      style={[style.box, { backgroundColor: theme.palette.background.main }]}
     >
       <LottieView
         source={require('../../assets/loading.json')}
         autoPlay
         loop
-        style={{
-          width: 200,
-          height: 200,
-          backgroundColor: theme.palette.background.main,
-        }}
+        style={[
+          { backgroundColor: theme.palette.background.main },
+          style.lottie,
+        ]}
       />
       <Text>{AppStore.locationMessage}</Text>
     </Box>
   );
+});
+
+const style = StyleSheet.create({
+  box: {
+    width: '100%',
+    height: '100%',
+    alignItems: 'center',
+    justifyContent: 'center',
+    zIndex: 10000,
+  },
+  lottie: {
+    width: 200,
+    height: 200,
+  },
 });

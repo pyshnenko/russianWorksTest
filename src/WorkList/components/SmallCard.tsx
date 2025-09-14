@@ -19,12 +19,12 @@ export default memo(function SmallCard(props: SmallCardProps): React.ReactNode {
     <Paper style={style.box}>
       <Box>
         {workTypes.map((item: WorkType) => (
-          <Text style={{ fontWeight: 'bold', fontSize: 18 }} key={item.id}>
+          <Text style={style.textBold} key={item.id}>
             {item.nameOne}
           </Text>
         ))}
         <Text>{priceWorker} руб. за смену</Text>
-        <Text style={{ fontSize: 13 }}>{companyName}</Text>
+        <Text style={style.otherText}>{companyName}</Text>
       </Box>
       <Image source={{ uri: logo }} width={50} height={50} />
     </Paper>

@@ -15,8 +15,8 @@ interface PropsType {
  */
 export default function JobDescription({ data }: PropsType): React.ReactNode {
   return (
-    <Paper elevation={8} style={{ marginTop: 8 }}>
-      <Box style={{ margin: 8 }}>
+    <Paper elevation={8} style={style.paperMarg}>
+      <Box style={style.boxMarg}>
         <Text style={style.text}>{data.address}</Text>
         <Text style={style.text}>{data.dateStartByCity}</Text>
         <Text style={style.text}>
@@ -40,4 +40,6 @@ const style = StyleSheet.create({
   text: {
     margin: 4,
   },
+  paperMarg: { marginTop: 8 },
+  boxMarg: { margin: 8 },
 });

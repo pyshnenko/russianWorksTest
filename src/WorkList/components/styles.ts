@@ -54,4 +54,11 @@ export const SmallCardStyle = StyleSheet.create({
     flexDirection: 'column',
     maxWidth: '80%',
   },
+  textBold: {
+    fontWeight: 'bold',
+    fontSize: 18,
+  },
+  otherText: {
+    fontSize: 13,
+  },
 });

@@ -1,10 +1,12 @@
-import React, { memo, useEffect } from 'react';
+import React, { memo, useEffect, useCallback } from 'react';
 import { Box, IconButton, Text, useTheme } from '@react-native-material/core';
 import { ApiReqObjectType } from '../../types/api';
 import { Image, BackHandler } from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import JobDescription from './JobDescription';
 import { fullCardStyle as style } from './styles';
+
+const CloseIcon = (iconProps: any) => <Icon name="close" {...iconProps} />;
 
 /**
  * Компонент для отображения карточки с подробной информацией о вакансии
@@ -14,22 +16,23 @@ export default memo(function FullCard(props: PropsType): React.ReactNode {
   const { setOpenCardIndex, cardData } = props;
   const theme = useTheme();
 
+  const backActionCallback = useCallback(() => {
+    // Создаем useCallback для предотвращения пересоздания
+    setOpenCardIndex(-1);
+    return true;
+  }, [setOpenCardIndex]);
+
   /**
    * Привяжем закрытие к кнопке "Назад"
    */
   useEffect(() => {
-    const backAction = () => {
-      setOpenCardIndex(-1);
-      return true;
-    };
-
     const backHandler = BackHandler.addEventListener(
       'hardwareBackPress',
-      backAction,
+      backActionCallback,
     );
 
     return () => backHandler.remove();
-  }, [setOpenCardIndex]);
+  }, [setOpenCardIndex, backActionCallback]);
 
   return (
     <Box
@@ -40,7 +43,7 @@ export default memo(function FullCard(props: PropsType): React.ReactNode {
     >
       <IconButton
         style={style.iconButtonStyle}
-        icon={props => <Icon name="close" {...props} />}
+        icon={CloseIcon}
         onPress={() => setOpenCardIndex(-1)}
       />
       <Box style={style.vacantBox}>
@@ -62,7 +65,7 @@ export default memo(function FullCard(props: PropsType): React.ReactNode {
           {cardData.workTypes.map(item => (
             <Text variant="h5" key={item.id}>
               {item.nameOne.replaceAll('-', ' - ')}
-            </Text> //для корректного переноса строк
+            </Text>
           ))}
           <Text style={style.textWrap} variant="h6">
             {cardData.companyName}
