@@ -22,13 +22,19 @@ export default observer(function WorkList(): React.ReactNode {
       setRowsCount(prevCount => prevCount + 25);
     }
   };
-  const handlePress = useCallback((index: number) => { //для уменьшения ререндеринга компонента SmallCard
+  const handlePress = useCallback((index: number) => {
+    //для уменьшения ререндеринга компонента SmallCard
     setOpenCardIndex(index);
   }, []);
 
   return (
     <SafeAreaView style={styles.container}>
-      {openCardIndex > -1 && <FullCard setOpenCardIndex={setOpenCardIndex} cardData={AppStore.workBase[openCardIndex]} />}
+      {openCardIndex > -1 && (
+        <FullCard
+          setOpenCardIndex={setOpenCardIndex}
+          cardData={AppStore.workBase[openCardIndex]}
+        />
+      )}
 
       <Box
         style={[

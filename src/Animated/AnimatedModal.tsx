@@ -12,18 +12,27 @@ import Animated, {
  * @isVisible - видимость
  */
 
-const AnimatedModal = ({ children, isVisible }: { children: React.ReactNode, isVisible: boolean }) => {
+const AnimatedModal = ({
+  children,
+  isVisible,
+}: {
+  children: React.ReactNode;
+  isVisible: boolean;
+}) => {
   const modalAnimatedValue = useSharedValue(0); // Начальное значение — скрыто
 
   const startAnimation = (target: number) => {
-    modalAnimatedValue.value = withTiming(target, { duration: 200, easing: Easing.ease });
+    modalAnimatedValue.value = withTiming(target, {
+      duration: 200,
+      easing: Easing.ease,
+    });
   };
 
   useEffect(() => {
     if (isVisible) {
-        startAnimation(1);
+      startAnimation(1);
     } else {
-        startAnimation(0);
+      startAnimation(0);
     }
   }, [isVisible]);
 
@@ -41,7 +50,7 @@ const AnimatedModal = ({ children, isVisible }: { children: React.ReactNode, isV
 
 const styles = StyleSheet.create({
   container: {
-    zIndex: 9999, 
+    zIndex: 9999,
   },
 });
 

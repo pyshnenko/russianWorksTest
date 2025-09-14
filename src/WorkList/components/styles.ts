@@ -1,4 +1,4 @@
-import { StyleSheet } from "react-native";
+import { StyleSheet } from 'react-native';
 
 export const fullCardStyle = StyleSheet.create({
   fullCardStyle: {
@@ -39,19 +39,19 @@ export const fullCardStyle = StyleSheet.create({
     position: 'absolute',
     top: 0,
     right: 10,
-  }
+  },
 });
 
 export const SmallCardStyle = StyleSheet.create({
-    box: {
-        flexDirection: 'row',
-        width: '100%',
-        justifyContent: 'space-between',
-        padding: 8,
-        paddingLeft: 12
-    },
-    vacantionBox: {
-        flexDirection: 'column',
-        maxWidth: '80%'
-    }
-})
+  box: {
+    flexDirection: 'row',
+    width: '100%',
+    justifyContent: 'space-between',
+    padding: 8,
+    paddingLeft: 12,
+  },
+  vacantionBox: {
+    flexDirection: 'column',
+    maxWidth: '80%',
+  },
+});

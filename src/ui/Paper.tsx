@@ -43,11 +43,7 @@ const Paper: React.FC<PaperProps> = ({
     },
   });
 
-  return (
-    <View style={[paperStyle.container, style]}>
-      {children}
-    </View>
-  );
+  return <View style={[paperStyle.container, style]}>{children}</View>;
 };
 
 export default memo(Paper);

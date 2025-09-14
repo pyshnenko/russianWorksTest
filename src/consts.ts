@@ -1,1 +1,2 @@
-export const apiBaseUrl = 'https://mobile.handswork.pro/api/shifts/map-list-unauthorized'
+export const apiBaseUrl =
+  'https://mobile.handswork.pro/api/shifts/map-list-unauthorized';
